@@ -1,0 +1,84 @@
+﻿@model BookModel
+@{
+    ViewData["Title"] = "Update book";
+}
+
+    <div class="container">
+        <h3 class="display-4">Update book</h3>
+        <hr />
+        @*@if (ViewBag.IsUpdated == true)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Congratulations</strong> You have added new book successfully. <br />
+                Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the details
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }*@
+        <form method="post" asp-action="UpdateBook">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Language"></label>
+                @*<select asp-for="Language" class="form-control">
+                    <option value="">Please choose a language</option>
+                    <option value="Urdu">Urdu (Mother Language)</option>
+                    <option value="Punjabi">Punjabi (Provincial Language)</option>
+                    <option value="English">English (Global Language)</option>
+                </select>*@
+
+                @*When we pass only list from controller*@
+                @*<select asp-for="Language" class="form-control" asp-items="new SelectList(ViewBag.Language)">*@
+
+                @*When we pass selectList from controller*@
+                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">
+                    <option value="">Please choose your language</option>
+                </select>
+
+                @*When we create multiSelectList*@
+                @*<select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+                    <option value="">Please choose your language</option>
+                </select>*@
+
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Author"></label>
+                <input asp-for="@Model.Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="@Model.Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Category"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="TotalPages"></label>
+                <input asp-for="@Model.TotalPages" class="form-control" />
+                <span asp-validation-for="TotalPages" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add book" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+

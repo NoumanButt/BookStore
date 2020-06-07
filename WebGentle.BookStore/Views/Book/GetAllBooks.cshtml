@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "All Books";
+}
+@model IEnumerable<BookModel>
+
+    <div class="container">
+        <h3 class="display-4">All Books</h3>
+        <hr />
+        @if (ViewBag.isDeleted == true)
+        {
+            <div class="alert alert-danger" role="alert">
+                <strong>Congratulations!</strong> You have deleted <strong>@ViewBag.bookName</strong> book successfully. <br />
+                @*Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the details*@
+                @*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>*@
+            </div>
+        }
+        @if (ViewBag.IsUpdated == true)
+        {
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Congratulations</strong> You have Update book successfully. <br />
+                Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.bookId">here</a> to view the details
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        <div class="row">
+
+            @foreach (var book in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div class="card-body">
+                            <h3 class="card-title">@book.Title</h3>
+                            @*<p class="card-text">@book.Category</p>*@
+                            <p class="card-text">@book.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="book" asp-action="getBook" asp-route-id="@book.Id" class="btn btn-sm btn-outline-secondary">View details</a>
+                                    <a asp-controller="book" asp-action="deleteBook" asp-route-id="@book.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    <a asp-controller="book" asp-action="UpdateBook" asp-route-id="@book.Id" class="btn btn-sm btn-outline-info">Update</a>
+                                </div>
+                                <small class="text-muted">@book.Author</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
